@@ -3,9 +3,15 @@
   "name": "EKG Device Monitor",
   "version": "0.1.0",
   "config_flow": true,
-  "dependencies": ["zeroconf"],
+  "dependencies": [
+    "zeroconf"
+  ],
   "documentation": "https://git.tazhome.net/Chas/ekg",
   "iot_class": "local_polling",
   "requirements": [],
-  "zeroconf": [{"type": "_ekg._tcp.local."}]
+  "zeroconf": [
+    {
+      "type": "_ekg._tcp.local."
+    }
+  ]
 }

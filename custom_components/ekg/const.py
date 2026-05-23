@@ -1,0 +1,5 @@
+DOMAIN = "ekg"
+DEFAULT_PORT = 8642
+CONF_HOST = "host"
+CONF_PORT = "port"
+SCAN_INTERVAL = 30

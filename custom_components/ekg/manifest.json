@@ -1,7 +1,7 @@
 {
   "domain": "ekg",
   "name": "EKG Device Monitor",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "config_flow": true,
   "dependencies": ["zeroconf"],
   "documentation": "https://git.tazhome.net/Chas/ekg",

@@ -23,11 +23,11 @@ class EKGCoordinator(DataUpdateCoordinator):
         self.host = host
         self.port = port
         self._url = f"http://{host}:{port}"
+        self._session = async_get_clientsession(hass)
 
     async def _async_update_data(self) -> dict:
-        session = async_get_clientsession(self.hass)
         try:
-            async with session.get(
+            async with self._session.get(
                 f"{self._url}/",
                 timeout=aiohttp.ClientTimeout(total=10),
             ) as resp:
@@ -40,9 +40,8 @@ class EKGCoordinator(DataUpdateCoordinator):
             raise UpdateFailed(str(e)) from e
 
     async def async_send_command(self, command: str) -> bool:
-        session = async_get_clientsession(self.hass)
         try:
-            async with session.post(
+            async with self._session.post(
                 f"{self._url}/command",
                 json={"command": command},
                 timeout=aiohttp.ClientTimeout(total=10),

@@ -11,13 +11,22 @@
       "zeroconf_confirm": {
         "title": "Discovered: {name}",
         "description": "Found **{name}** on your network. Add it to Home Assistant?"
+      },
+      "reconfigure": {
+        "title": "Reconfigure EKG device",
+        "description": "Update the host or port for this device.",
+        "data": {
+          "host": "Host or IP address",
+          "port": "Port"
+        }
       }
     },
     "error": {
       "cannot_connect": "Could not connect — check the host/port and ensure ha-heartbeat is running."
     },
     "abort": {
-      "already_configured": "This device is already configured."
+      "already_configured": "This device is already configured.",
+      "reconfigure_successful": "Device configuration updated successfully."
     }
   }
 }

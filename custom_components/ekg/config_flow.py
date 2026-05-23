@@ -1,7 +1,6 @@
 import aiohttp
 import voluptuous as vol
 from homeassistant import config_entries
-from homeassistant.components.zeroconf import ZeroconfServiceInfo
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .const import CONF_HOST, CONF_PORT, DEFAULT_PORT, DOMAIN
@@ -49,11 +48,11 @@ class EKGConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             errors=errors,
         )
 
-    async def async_step_zeroconf(self, discovery_info: ZeroconfServiceInfo):
-        # HA calls this automatically when it sees _ekg._tcp.local. on the network
-        host = discovery_info.host
-        port = discovery_info.port
-        device_name = discovery_info.name.replace("._ekg._tcp.local.", "")
+    async def async_step_zeroconf(self, discovery_info):
+        # discovery_info is a ZeroconfServiceInfo — no import needed, works across all HA versions
+        host = str(discovery_info.host)
+        port = int(discovery_info.port)
+        device_name = str(discovery_info.name).replace("._ekg._tcp.local.", "").replace("._ekg._tcp.", "")
 
         await self.async_set_unique_id(f"ekg_{device_name}")
         self._abort_if_unique_id_configured()
